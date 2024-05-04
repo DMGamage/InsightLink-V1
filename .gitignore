@@ -27,6 +27,8 @@ share/python-wheels/
 MANIFEST
 *.mp3
 *.mp4
+video_to_audio
+*.wav
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
