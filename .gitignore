@@ -27,7 +27,10 @@ share/python-wheels/
 MANIFEST
 *.mp3
 *.mp4
-video_to_audio
+video_to_audio/*.mp3
+video_to_audio/*.mp4
+video_to_audio/audio_parts/*.mp3
+
 *.wav
 
 # PyInstaller
