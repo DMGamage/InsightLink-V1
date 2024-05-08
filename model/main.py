@@ -17,18 +17,19 @@ def count_and_read_audio_parts(output_folder):
     num_files = len(audio_files)
     print(f"Total number of audio files: {num_files}")
 
+    audio_files.sort()
+    full_text =""
+
     for file_name in audio_files:
         file_path = os.path.join(output_folder, file_name)
 
         try:
             # Read audio file
             audio, sampling_rate = sf.read(file_path)
-            print(f"Successfully read audio file: {file_name}")
-            print(f"Sampling rate: {sampling_rate}")
 
             # Process the audio data as needed
             audio_transposed = np.transpose(audio)
-            print(f"audion transporse {audio_transposed.shape}")
+
 
             audio_mono = librosa.to_mono(audio_transposed)
 
@@ -45,12 +46,18 @@ def count_and_read_audio_parts(output_folder):
             )["chunks"]
 
             # Extracting text from the first element of the list
-            transcribed_text = result[0]['text']  # Access transcribed text using the correct key 'text'
+            # transcribed_text = result[0]['text']  # Access transcribed text using the correct key 'text'
+            # full_text =transcribed_text + " "
 
-            print(transcribed_text)  # Print transcribed text
+            for chunk in result:
+                transcribed_text = chunk['text']
+                full_text += transcribed_text + " "
+
+             # Print transcribed text
         except Exception as e:
             print(f"Error processing audio file {file_name}: {e}")
 
+    print(full_text)
 
 if __name__ == "__main__":
     # Count and read audio parts
