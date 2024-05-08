@@ -37,14 +37,17 @@ def count_and_read_audio_parts(output_folder):
                                            target_sr=16000)
 
             # Transcribe audio using ASR pipeline
-            text = asr(
+            result = asr(
                 audio_16KHz,
-                chunk_length_s=29,  # 30 seconds
-                batch_size=4,
-                return_timestamps=False,
-            )["chunks"][0]  # Access transcribed text using the correct key 'text'
+                chunk_length_s=30,  # 30 seconds
+                batch_size=21,
+                return_timestamps=True,
+            )["chunks"]
 
-            print(text)  # Print transcribed text
+            # Extracting text from the first element of the list
+            transcribed_text = result[0]['text']  # Access transcribed text using the correct key 'text'
+
+            print(transcribed_text)  # Print transcribed text
         except Exception as e:
             print(f"Error processing audio file {file_name}: {e}")
 
